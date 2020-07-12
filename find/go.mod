@@ -1,4 +1,4 @@
-module createTable
+module find
 
 go 1.14
 

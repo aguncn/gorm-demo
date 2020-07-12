@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -31,10 +32,12 @@ func main() {
 	db.DB().SetMaxOpenConns(100)
 	defer db.Close()
 
-	if !db.HasTable(&User{}) {
-		if err := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&User{}).Error; err != nil {
-			panic(err)
-		}
-	}
+	var user User
+	db.Where("username=?", "chengang").First(&user)
+	fmt.Println(user)
+
+	var users []User
+	db.Where("username=?", "chengang").Find(&users) //方法1:查询所有结果放入users数组
+	fmt.Println(users)
 
 }

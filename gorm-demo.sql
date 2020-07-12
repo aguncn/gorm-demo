@@ -1,0 +1,1 @@
+CREATE DATABASE `gorm-demo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;

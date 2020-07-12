@@ -1,4 +1,4 @@
-module createTable
+module delete
 
 go 1.14
 

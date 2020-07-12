@@ -1,4 +1,4 @@
-module createTable
+module insert
 
 go 1.14
 

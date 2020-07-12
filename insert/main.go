@@ -31,10 +31,13 @@ func main() {
 	db.DB().SetMaxOpenConns(100)
 	defer db.Close()
 
-	if !db.HasTable(&User{}) {
-		if err := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&User{}).Error; err != nil {
-			panic(err)
-		}
+	user := &User{
+		CreatedBy: "admin",
+		Username:  "chengang",
+		Password:  "mypwd",
+	}
+	if err := db.Create(user).Error; err != nil {
+		panic(err)
 	}
 
 }

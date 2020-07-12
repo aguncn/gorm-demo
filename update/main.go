@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -31,10 +32,9 @@ func main() {
 	db.DB().SetMaxOpenConns(100)
 	defer db.Close()
 
-	if !db.HasTable(&User{}) {
-		if err := db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&User{}).Error; err != nil {
-			panic(err)
-		}
-	}
+	var user User
+	db.Where("username=?", "chengang").First(&user)
+	db.Model(&user).Update("created_by", "root")
+	fmt.Println(user)
 
 }
